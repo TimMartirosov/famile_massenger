@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "228159555424",
+    "project_id": "familemessenger",
+    "storage_bucket": "familemessenger.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:228159555424:android:8f09e8df50ddd81a6b4005",
+        "android_client_info": {
+          "package_name": "com.example.famile_massenger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "228159555424-pi27iet5q5v7if6hnq42pts5gqc9qvcc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.famile_massenger",
+            "certificate_hash": "00394fd0022b83b0b1cc49421639bab98220c46d"
+          }
+        },
+        {
+          "client_id": "228159555424-hb5id250dmqj9f08535ambf1m28917kh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDO-Rzg9zAdChMzNqiJbr_WGtoIY22VMs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "228159555424-hb5id250dmqj9f08535ambf1m28917kh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
