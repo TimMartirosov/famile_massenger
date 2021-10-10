@@ -5,13 +5,14 @@ import 'package:pinput/pin_put/pin_put.dart';
 import 'package:connectycube_sdk/connectycube_sdk.dart';
 import '/configs.dart' as config;
 
-// Connect
+String? token = FirebaseAuth.instance.currentUser?.uid;
+String? varificationCode;
+const String PId = "familemessenger";
+
 signInUsingFirebase(projectId, accessToken) {
-  String projectId = "";
+  String projectId = PId;
   String? accessToken = token;
 }
-
-String? token = FirebaseAuth.instance.currentUser?.uid;
 
 class OTPControllerScreen extends StatefulWidget {
   final String phone;
@@ -27,9 +28,6 @@ class _OTPControllerScreenState extends State<OTPControllerScreen> {
   final GlobalKey<ScaffoldState> _scaffolkey = GlobalKey<ScaffoldState>();
   final TextEditingController _pinOTPCodeController = TextEditingController();
   final FocusNode _pinOTPCodeFocus = FocusNode();
-
-  String? varificationCode;
-
   final BoxDecoration pinOTPCodeDecoration = BoxDecoration(
       color: Colors.blue[50],
       borderRadius: BorderRadius.circular(10.0),
