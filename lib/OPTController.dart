@@ -3,15 +3,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 import 'package:connectycube_sdk/connectycube_sdk.dart';
+import 'package:famile_massenger/src/loginScreen.dart';
 import '/configs.dart' as config;
+import 'configs.dart';
 
-String? token = FirebaseAuth.instance.currentUser?.uid;
+String? accessToken = FirebaseAuth.instance.currentUser?.uid;
 String? varificationCode;
-const String PId = "familemessenger";
+const String projectId = "familemessenger";
 
 signInUsingFirebase(projectId, accessToken) {
-  String projectId = PId;
-  String? accessToken = token;
+  String projectId = "";
+  String accessToken = "";
 }
 
 class OTPControllerScreen extends StatefulWidget {
@@ -34,7 +36,7 @@ class _OTPControllerScreenState extends State<OTPControllerScreen> {
       border: Border.all(color: Colors.grey));
 
   @override
-  void initState() {
+  initState() {
     super.initState();
     init(
       config.APP_ID,
@@ -53,6 +55,13 @@ class _OTPControllerScreenState extends State<OTPControllerScreen> {
             .signInWithCredential(credential)
             .then((value) {
           if (value.user != null) {
+            createSession().then((cubeSession) {
+              CubeUser user = CubeUser(
+                  login: "$accessToken",
+                  password: "$accessToken",
+                  phone: widget.codeDigits + widget.phone);
+              signUp(user).then((cubeUser) {}).catchError((error) {});
+            }).catchError((error) {});
             Navigator.of(context)
                 .push(MaterialPageRoute(builder: (c) => HomeScreen()));
           }
