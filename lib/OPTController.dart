@@ -3,18 +3,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 import 'package:connectycube_sdk/connectycube_sdk.dart';
-import 'package:famile_massenger/src/loginScreen.dart';
 import '/configs.dart' as config;
-import 'configs.dart';
 
 String? accessToken = FirebaseAuth.instance.currentUser?.uid;
 String? varificationCode;
 const String projectId = "familemessenger";
 
-signInUsingFirebase(projectId, accessToken) {
-  String projectId = "";
-  String accessToken = "";
-}
+// signInUsingFirebase(projectId, accessToken) {
+//   String projectId = "";
+//   String accessToken = "";
+// }
 
 class OTPControllerScreen extends StatefulWidget {
   final String phone;
