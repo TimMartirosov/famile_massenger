@@ -19,7 +19,7 @@ class _LoginScreenState extends State<LoginScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(
-          height: 100,
+          height: 130,
         ),
         Padding(
           padding: const EdgeInsets.only(left: 28.0, right: 28.0),
@@ -35,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
         SizedBox(
-          height: 50,
+          height: 80,
         ),
         SizedBox(
           width: 400,
@@ -46,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 dialCodeDigits = country.dialCode!;
               });
             },
-            initialSelection: "IT",
+            initialSelection: "",
             showCountryOnly: false,
             showOnlyCountryWhenClosed: false,
             favorite: ["+38", "UA"],

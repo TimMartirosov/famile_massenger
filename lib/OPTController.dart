@@ -5,19 +5,12 @@ import 'package:pinput/pin_put/pin_put.dart';
 import 'package:connectycube_sdk/connectycube_sdk.dart';
 import '/configs.dart' as config;
 
-String? accessToken = FirebaseAuth.instance.currentUser?.uid;
 String? varificationCode;
 const String projectId = "familemessenger";
-
-// signInUsingFirebase(projectId, accessToken) {
-//   String projectId = "";
-//   String accessToken = "";
-// }
 
 class OTPControllerScreen extends StatefulWidget {
   final String phone;
   final String codeDigits;
-
   OTPControllerScreen({required this.phone, required this.codeDigits});
 
   @override
@@ -53,13 +46,7 @@ class _OTPControllerScreenState extends State<OTPControllerScreen> {
             .signInWithCredential(credential)
             .then((value) {
           if (value.user != null) {
-            createSession().then((cubeSession) {
-              CubeUser user = CubeUser(
-                  login: "$accessToken",
-                  password: "$accessToken",
-                  phone: widget.codeDigits + widget.phone);
-              signUp(user).then((cubeUser) {}).catchError((error) {});
-            }).catchError((error) {});
+            fromFBtoCube(widget, FirebaseAuth.instance.currentUser?.uid);
             Navigator.of(context)
                 .push(MaterialPageRoute(builder: (c) => HomeScreen()));
           }
@@ -88,6 +75,18 @@ class _OTPControllerScreenState extends State<OTPControllerScreen> {
       },
       timeout: Duration(seconds: 60),
     );
+  }
+
+  fromFBtoCube(widget, login) {
+    createSession().then((cubeSession) {
+      CubeUser user = CubeUser(
+          login: FirebaseAuth.instance.currentUser?.uid,
+          password: FirebaseAuth.instance.currentUser?.uid,
+          phone: widget.codeDigits + widget.phone);
+      signUp(user).then((cubeUser) {}).catchError((error) {
+        getUserByLogin(login);
+      });
+    }).catchError((error) {});
   }
 
   @override
@@ -136,6 +135,8 @@ class _OTPControllerScreenState extends State<OTPControllerScreen> {
                           verificationId: varificationCode!, smsCode: pin))
                       .then((value) {
                     if (value.user != null) {
+                      fromFBtoCube(
+                          widget, FirebaseAuth.instance.currentUser?.uid);
                       Navigator.of(context).push(
                           MaterialPageRoute(builder: (c) => HomeScreen()));
                     }

@@ -1,6 +1,7 @@
 import 'package:famile_massenger/src/loginScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:connectycube_sdk/connectycube_sdk.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);
@@ -14,38 +15,50 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).primaryColor,
         centerTitle: true,
         title: Text(
-          "home screen",
+          "Messanges",
           style: TextStyle(color: Colors.white),
         ),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset("images/hi.png"),
-          Container(
-              margin: EdgeInsets.all(65),
-              width: double.infinity,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.red,
-                ),
-                onPressed: () {
-                  FirebaseAuth.instance.signOut();
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (c) => LoginScreen()));
-                },
-                child: Text(
-                  "Logout",
-                  style: TextStyle(
+      drawer: Drawer(
+          backgroundColor: Colors.white,
+          child: ListView(
+            children: <Widget>[
+              DrawerHeader(
+                  margin: EdgeInsets.zero,
+                  padding: EdgeInsets.zero,
+                  child: UserAccountsDrawerHeader(
+                    currentAccountPicture: Container(
+                        decoration: BoxDecoration(
+                      shape: BoxShape.circle,
                       color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold),
-                ),
-              ))
-        ],
-      ),
+                    )),
+                    decoration:
+                        BoxDecoration(color: Theme.of(context).primaryColor),
+                    accountName: Text("UserName"),
+                    accountEmail: Text("Phone"),
+                  )),
+              ListTile(
+                  title: new Text("О себе"),
+                  leading: Icon(Icons.account_circle_sharp),
+                  onTap: () {}),
+              ListTile(
+                  title: Text("Настройки"),
+                  leading: Icon(Icons.settings_sharp),
+                  onTap: () {}),
+              ListTile(
+                  title: Text("Выход"),
+                  leading: Icon(Icons.login_sharp),
+                  onTap: () {
+                    FirebaseAuth.instance.signOut();
+                    signOut().then((voidResult) {}).catchError((error) {});
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (c) => LoginScreen()));
+                  })
+            ],
+          )),
     );
   }
 }
